@@ -48,7 +48,7 @@ q15_axpy_rvv(const int16_t *a, const int16_t *b, int16_t *y, int n,
 		vint16m1_t bld = __riscv_vle16_v_i16m1(b, vl);
 
 		vint32m2_t acc = __riscv_vwmacc_vx_i32m2(
-			__riscv_vwadd_vx_i32m2(ald, 0, vl), alpha, bld, vl);
+			__riscv_vwcvt_x_x_v_i32m2(ald, vl), alpha, bld, vl);
 		vint16m1_t res = __riscv_vnclip_wx_i16m1(acc, 0, 2, vl);
 
 		__riscv_vse16_v_i16m1(y, res, vl);
